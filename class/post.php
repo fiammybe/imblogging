@@ -640,12 +640,13 @@ class ImbloggingPostHandler extends icms_ipf_Handler {
 		$criteria->setStart($offset);
 		$criteria->setLimit($limit);
 
-		if ($userid != 0) {
+		if ($userid !== 0) {
 			$criteria->add(new icms_db_criteria_Item('post_uid', $userid));
 		}
 		if ($queryarray) {
 			$criteriaKeywords = new icms_db_criteria_Compo();
-			for ($i = 0; $i < count($queryarray); $i++ ) {
+			$queryarray_count = count($queryarray);
+			for ($i = 0; $i < $queryarray_count; $i++ ) {
 				$criteriaKeyword = new icms_db_criteria_Compo();
 				$criteriaKeyword->add(new icms_db_criteria_Item('post_title', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
 				$criteriaKeyword->add(new icms_db_criteria_Item('post_content', '%' . $queryarray[$i] . '%', 'LIKE'), 'OR');
@@ -686,7 +687,7 @@ class ImbloggingPostHandler extends icms_ipf_Handler {
 	 */
 	function userCanSubmit() {
 		global $imblogging_isAdmin;
-		$imbloggingModuleConfig = icms_getModuleConfig(basename(dirname(dirname(__FILE__))));
+		$imbloggingModuleConfig = icms_getModuleConfig(basename(dirname(__FILE__, 2)));
 
 		if (!is_object(icms::$user)) {
 			return FALSE;
