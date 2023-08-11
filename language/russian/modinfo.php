@@ -13,7 +13,6 @@ if (!defined("ICMS_ROOT_PATH")) die("Не определен корневой п
 // Module Info
 // The name of this module
 
-global $icmsModule;
 define("_MI_IMBLOGGING_MD_NAME", "imBlogging");
 define("_MI_IMBLOGGING_MD_DESC", "Простой модуль блогов для ImpressCMS");
 
