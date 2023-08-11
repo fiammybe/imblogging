@@ -18,14 +18,14 @@ defined("ICMS_ROOT_PATH") || die("ICMS root path not defined");
  */
 $modversion = array(
 	'name' => _MI_IMBLOGGING_MD_NAME,
-	'version' => 1.1,
+	'version' => 1.2,
 	'description' => _MI_IMBLOGGING_MD_DESC,
 	'author' => "The SmartFactory",
 	'credits' => "INBOX International inc.",
 	'help' => "",
 	'license' => "GNU General Public License (GPL)",
 	'official' => 0,
-	'dirname' => basename(dirname(__FILE__)),
+	'dirname' => basename(__DIR__),
 	'modname' => 'imblogging',
 
 	/**
@@ -38,35 +38,21 @@ $modversion = array(
 /**  Development information */
 	'status_version' => "RC",
 	'status' => "RC",
-	'date' => "2013-05-10",
-	'author_word' => "",
+	'date' => "11 Aug 2023",
+	'author_word' => "Compatibility with ImpressCMS 2.0",
 
 	/**
 	 * Contributors
 	 */
-	'developer_website_url' => "",
-	'developer_website_name' => "",
-	'developer_email' => "");
-$modversion['people']['developers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=168]marcan[/url] (Marc-Andr&eacute; Lanciault)";
-$modversion['people']['developers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=392]stranger[/url] (Sina Asghari)";
-$modversion['people']['developers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=69]vaughan[/url]";
-$modversion['people']['developers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=54]skenow[/url]";
-$modversion['people']['developers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=10]sato-san[/url]";
-$modversion['people']['testers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=53]davidl2[/url]";
-$modversion['people']['testers'][] = "[url=http://community.impresscms.org/userinfo.php?uid=340]nekro[/url]";
-$modversion['people']['translators'][] = "[url=http://community.impresscms.org/userinfo.php?uid=392]stranger[/url] (Sina Asghari)";
-$modversion['people']['translators'][] = "[url=http://community.impresscms.org/userinfo.php?uid=10]sato-san[/url]";
-$modversion['people']['translators'][] = "[url=http://community.impresscms.org/userinfo.php?uid=179]McDonald[/url]";
-$modversion['people']['translators'][] = "[url=http://community.impresscms.org/userinfo.php?uid=14]GibaPhp[/url]";
-$modversion['people']['documenters'][] = "[url=http://community.impresscms.org/userinfo.php?uid=372]UnderDog[/url]";
-// $modversion['people']['other'][] = "";
+	'developer_website_url' => "https://github.com/ImpressModules/imblogging",
+	'developer_website_name' => "Github",
+	'developer_email' => "david.j@impresscms.org");
+$modversion['people']['developers'][] = "[url=https://www.impresscms.org/userinfo.php?uid=1102]fiammybe[/url] (David Janssens)";
 
 /**
  * Manual
  */
-$modversion['manual']['wiki'][] = "<a href='http://wiki.impresscms.org/index.php?title=ImBlogging' target='_blank'>English</a>";
-$modversion['manual']['wiki'][] = "<a href='http://wiki.impresscms.org/index.php?title=ImBlogging/es' target='_blank'>Español</a>";
-$modversion['manual']['wiki'][] = "<a href='http://wiki.impresscms.org/index.php?title=ImBlogging/pt-br' target='_blank'>Português do Brasil</a>";
+$modversion['manual']['wiki'][] = "<a href='https://github.com/ImpressModules/imblogging/wiki' target='_blank'>Documentation</a>";
 
 $modversion['warning'] = _CO_ICMS_WARNING_RC;
 
