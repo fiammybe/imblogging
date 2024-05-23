@@ -18,9 +18,9 @@ defined("ICMS_ROOT_PATH") || die("ICMS root path not defined");
  */
 $modversion = array(
 	'name' => _MI_IMBLOGGING_MD_NAME,
-	'version' => 1.2,
+	'version' => "2.0.0",
 	'description' => _MI_IMBLOGGING_MD_DESC,
-	'author' => "The SmartFactory",
+	'author' => "fiammybe",
 	'credits' => "INBOX International inc.",
 	'help' => "",
 	'license' => "GNU General Public License (GPL)",
@@ -36,9 +36,9 @@ $modversion = array(
 	'image' => "images/icon_big.png", /* for backward compatibility */
 
 /**  Development information */
-	'status_version' => "RC",
-	'status' => "RC",
-	'date' => "11 Aug 2023",
+	'status_version' => "2.0.0 Alpha",
+	'status' => "Alpha",
+	'date' => "23 May 2024",
 	'author_word' => "Compatibility with ImpressCMS 2.0",
 
 	/**
@@ -54,7 +54,7 @@ $modversion['people']['developers'][] = "[url=https://www.impresscms.org/userinf
  */
 $modversion['manual']['wiki'][] = "<a href='https://github.com/ImpressModules/imblogging/wiki' target='_blank'>Documentation</a>";
 
-$modversion['warning'] = _CO_ICMS_WARNING_RC;
+$modversion['warning'] = _CO_ICMS_WARNING_ALPHA;
 
 /**
  * Administrative information
