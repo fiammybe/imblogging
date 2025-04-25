@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
  * @since 1.0
  * @author marcan aka Marc-André Lanciault <marcan@smartfactory.ca>
- * 
+ *
  */
 if (!defined("ICMS_ROOT_PATH")) die("ICMS root path not defined");
 
@@ -18,8 +18,6 @@ if (!defined("IMBLOGGING_ADMIN_URL")) define("IMBLOGGING_ADMIN_URL", IMBLOGGING_
 
 // Include the common language file of the module
 icms_loadLanguageFile(IMBLOGGING_DIRNAME, 'common');
-
-include_once IMBLOGGING_ROOT_PATH . "include/functions.php";
 
 // Creating the module object to make it available throughout the module
 $imbloggingModule = icms_getModuleInfo(IMBLOGGING_DIRNAME);
