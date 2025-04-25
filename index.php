@@ -14,7 +14,7 @@
  */
 include_once 'header.php';
 
-$xoopsOption['template_main'] = 'imblogging_index.html';
+$xoopsOption['template_main'] = 'imblogging_index.html.tpl';
 /**
  * Include the ICMS header file
  */
@@ -51,7 +51,7 @@ $category_pathArray = array();
 if ($clean_post_uid) {
 	$imb_user_handler = new icms_member_user_Handler(icms::$xoopsDB);
 	$author = $imb_user_handler->get($clean_post_uid);
-	
+
 	$imblogging_poster_link = icms_member_user_Handler::getUserLink($clean_post_uid);
 	$extr_arg = 'uid=' . $clean_post_uid;
 	$rss_url .= '?' . $extr_arg;
@@ -60,12 +60,12 @@ if ($clean_post_uid) {
 	$extr_argArray[] = $extr_arg;
 	// removed code duplication here - icms_member_user_Handler::getUserLink($clean_post_uid) was called a 2nd time
 	$category_pathArray[] = sprintf(_CO_IMBLOGGING_POST_FROM_USER, $imblogging_poster_link);
-	
+
 	// get information to use for meta properties when filtered by author
 	$author_name = $author->getVar('uname');
 	// what can be used for meta description when showing posts by an author? Their bio (extra info) from their profile?
 	$author_bio = $author->getVar('bio');
-	
+
 } else {
 	$rss_info = _MD_IMBLOGGING_RSS_GLOBAL;
 	$extr_arg = '';
@@ -79,7 +79,7 @@ if ($clean_cid) {
 	$category_name = $imtagging_category_handler->getCategoryName($clean_cid);
 	$category_pathArray[] = $category_name;
 	$extr_argArray[] = 'cid=' . $clean_cid;
-	
+
 	// category meta information
 	$categoryObj = $imtagging_category_handler->get($clean_cid);
 	$category_meta_description = $categoryObj->getVar('meta_description');

@@ -9,7 +9,7 @@
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU General Public License (GPL)
  * @since 1.0
  * @author marcan aka Marc-André Lanciault <marcan@smartfactory.ca>
- * 
+ *
  */
 
 /**
@@ -34,7 +34,7 @@ function editpost($post_id = 0) {
 		$sform->assign($icmsAdminTpl);
 	}
 	$icmsAdminTpl->assign('postid', $post_id);
-	$icmsAdminTpl->display('db:imblogging_admin_post.html');
+	$icmsAdminTpl->display('db:imblogging_admin_post.html.tpl');
 }
 /*
  * $icmsOnDemandPreload[] = array(
@@ -182,7 +182,7 @@ if (in_array($clean_op, $valid_op, true)) {
 
 			$icmsAdminTpl->assign('imblogging_post_table', $objectTable->fetch());
 
-			$icmsAdminTpl->display('db:imblogging_admin_post.html');
+			$icmsAdminTpl->display('db:imblogging_admin_post.html.tpl');
 			break;
 	}
 	icms_cp_footer();

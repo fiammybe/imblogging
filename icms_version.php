@@ -121,7 +121,7 @@ $modversion['blocks'][1] = array(
 	'show_func' => 'imblogging_post_recent_show',
 	'edit_func' => 'imblogging_post_recent_edit',
 	'options' => '5',
-	'template' => 'imblogging_post_recent.html');
+	'template' => 'imblogging_post_recent.html.tpl');
 
 $modversion['blocks'][] = array(
 	'file' => 'post_by_month.php',
@@ -130,7 +130,7 @@ $modversion['blocks'][] = array(
 	'show_func' => 'imblogging_post_by_month_show',
 	'edit_func' => 'imblogging_post_by_month_edit',
 	'options' => '',
-	'template' => 'imblogging_post_by_month.html');
+	'template' => 'imblogging_post_by_month.html.tpl');
 
 $modversion['blocks'][] = array(
 	'file' => 'post_recent.php',
@@ -139,33 +139,33 @@ $modversion['blocks'][] = array(
 	'show_func' => 'imblogging_post_recent_show',
 	'edit_func' => 'imblogging_post_recent_edit',
 	'options' => '5',
-	'template' => 'imblogging_post_spotlight.html');
+	'template' => 'imblogging_post_spotlight.html.tpl');
 
 /**
  * Templates information
  */
 $modversion['templates'][1] = array(
-	'file' => 'imblogging_header.html',
+	'file' => 'imblogging_header.html.tpl',
 	'description' => 'Module Header');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_footer.html',
+	'file' => 'imblogging_footer.html.tpl',
 	'description' => 'Module Footer');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_admin_post.html',
+	'file' => 'imblogging_admin_post.html.tpl',
 	'description' => 'Post Index');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_index.html',
+	'file' => 'imblogging_index.html.tpl',
 	'description' => 'Post Index');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_single_post.html',
+	'file' => 'imblogging_single_post.html.tpl',
 	'description' => 'Single post template');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_post.html',
+	'file' => 'imblogging_post.html.tpl',
 	'description' => 'Post page');
 
 /**
@@ -196,7 +196,7 @@ $modversion['config'][] = array(
 	'valuetype' => 'array',
 	'options' => $select_groups_options,
 	'default' => '1');
-	
+
 $modversion['config'][] = array(
 	'name' => 'posts_limit',
 	'title' => '_MI_IMBLOGGING_LIMIT',

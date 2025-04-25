@@ -72,7 +72,7 @@ function editpost($postObj) {
 
 include_once 'header.php';
 
-$xoopsOption['template_main'] = 'imblogging_post.html';
+$xoopsOption['template_main'] = 'imblogging_post.html.tpl';
 include_once ICMS_ROOT_PATH . '/header.php';
 
 $imblogging_post_handler = icms_getModuleHandler('post', $moddir, 'imblogging');
