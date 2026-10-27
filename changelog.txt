@@ -12,6 +12,8 @@ Added
 
 Fixed
 * Compatibility with ImpressCMS 2.0
+* Compatibility with PHP 8.2+ (undefined constant/variables/function, null guards for anonymous users, empty category IN () query, unset [more] offset)
+* Restored the .html.tpl templates and registered the requirements template
 
 Language changes
 modinfo.php

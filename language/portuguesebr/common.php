@@ -48,3 +48,9 @@ define("_CO_IMBLOGGING_POST_PUBLISHED", "Publicado");
 define("_CO_IMBLOGGING_POST_ON", "on");
 define("_CO_IMBLOGGING_POST_BY", "por");
 define("_CO_IMBLOGGING_FILED_UNDER", "Arquivado em: ");
+
+// TODO: translate
+define("_CO_IMBLOGGING_POST_CATEGORIES", "Categories");
+define("_CO_IMBLOGGING_POST_PENDING", "Submitted for review");
+define("_CO_IMBLOGGING_POST_DRAFT", "Submitted as a draft");
+define("_CO_IMBLOGGING_POST_PRIVATE", "Published as private");

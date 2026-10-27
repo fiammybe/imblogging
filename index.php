@@ -75,7 +75,7 @@ $icmsTpl->assign('imblogging_rss_url', $rss_url);
 $icmsTpl->assign('imblogging_rss_info', $rss_info);
 
 if ($clean_cid) {
-	$imtagging_category_handler = icms_getModuleHandler('category', $moddir, 'imtagging');
+	$imtagging_category_handler = icms_getModuleHandler('category', 'imtagging');
 	$category_name = $imtagging_category_handler->getCategoryName($clean_cid);
 	$category_pathArray[] = $category_name;
 	$extr_argArray[] = 'cid=' . $clean_cid;

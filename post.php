@@ -19,6 +19,10 @@
 function editpost($postObj) {
 	global $imblogging_post_handler, $xoTheme, $icmsTpl;
 
+	if (!is_object(icms::$user)) {
+		redirect_header(IMBLOGGING_URL, 3, _NOPERM);
+	}
+
 	$postObj->setControl('categories', array(
 		'name' => 'categories',
 		'module' => 'imtagging',
@@ -102,14 +106,14 @@ if (in_array($clean_op, $valid_op, true)) {
 		case "mod":
 			$postObj = $imblogging_post_handler->get($clean_post_id);
 			if ($clean_post_id > 0 && $postObj->isNew()) {
-				redirect_header(icms_getPreviousPage('index.php'), 3, _NOPERM);
+				redirect_header(icms::$urls['previouspage'], 3, _NOPERM);
 			}
 			editpost($postObj);
 			break;
 
 		case "addpost":
 			if (!icms::$security->check()) {
-				redirect_header(icms_getPreviousPage('index.php'), 3, _MD_IMBLOGGING_SECURITY_CHECK_FAILED . implode('<br />', $xoopsSecurity->getErrors()));
+				redirect_header(icms::$urls['previouspage'], 3, _MD_IMBLOGGING_SECURITY_CHECK_FAILED . implode('<br />', icms::$security->getErrors()));
 			}
 			$controller = new icms_ipf_Controller($imblogging_post_handler);
 			/* need to flush the template option to prevent error on redirect */
@@ -124,7 +128,7 @@ if (in_array($clean_op, $valid_op, true)) {
 			}
 			if (isset($_POST['confirm'])) {
 				if (!icms::$security->check()) {
-					redirect_header($impresscms->urls['previouspage'], 3, _MD_IMBLOGGING_SECURITY_CHECK_FAILED . implode('<br />', $xoopsSecurity->getErrors()));
+					redirect_header(icms::$urls['previouspage'], 3, _MD_IMBLOGGING_SECURITY_CHECK_FAILED . implode('<br />', icms::$security->getErrors()));
 				}
 			}
 			$controller = new icms_ipf_Controller($imblogging_post_handler);

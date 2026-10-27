@@ -50,3 +50,9 @@ define("_MI_IMBLOGGING_GLOBAL_POST_PUBLISHED_NOTIFY_SBJ", "[{X_SITENAME}] {X_MOD
 
 // Submit button
 define("_MI_IMBLOGGING_POST_ADD", "Добавить сообщение");
+
+// TODO: translate
+define('_MI_IMBLOGGING_DEF_VIEW_PERM', 'Default View Permissions');
+define('_MI_IMBLOGGING_DEF_VIEW_PERM_DSC', 'By default, Who can read posts. Individual posts can be adjusted');
+define("_MI_IMBLOGGING_POST_NOTIFY", "Post");
+define("_MI_IMBLOGGING_POST_NOTIFY_DSC", "Notification for a single post");

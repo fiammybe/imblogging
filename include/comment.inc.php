@@ -12,6 +12,7 @@
  * 
  */
 function imblogging_com_update($item_id, $total_num) {
+	$moddir = basename(dirname(__DIR__));
 	$imblogging_post_handler = icms_getModuleHandler('post', $moddir, 'imblogging');
 	$imblogging_post_handler->updateComments($item_id, $total_num);
 }

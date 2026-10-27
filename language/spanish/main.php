@@ -23,3 +23,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'Subscribirse a los últimos envíos de este
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "Añadir un nuevo artículo");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');

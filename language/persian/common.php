@@ -48,3 +48,8 @@ define("_CO_IMBLOGGING_POST_PUBLISHED", "منتشر شده");
 define("_CO_IMBLOGGING_POST_ON", "به‌تاریخ");
 define("_CO_IMBLOGGING_POST_BY", "توسط");
 define("_CO_IMBLOGGING_FILED_UNDER", "جای گرفته در: ");
+
+// TODO: translate
+define("_CO_IMBLOGGING_POST_PENDING", "Submitted for review");
+define("_CO_IMBLOGGING_POST_DRAFT", "Submitted as a draft");
+define("_CO_IMBLOGGING_POST_PRIVATE", "Published as private");

@@ -25,3 +25,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'Abonneer u op de laatste berichten van deze
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "Voeg nieuw bericht toe");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');
