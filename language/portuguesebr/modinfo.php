@@ -53,3 +53,7 @@ define("_MI_IMBLOGGING_GLOBAL_POST_PUBLISHED_NOTIFY_SBJ", "[{X_SITENAME}] {X_MOD
 
 // Submit button
 define("_MI_IMBLOGGING_POST_ADD", "Incluir novo Blog");
+
+// TODO: translate
+define("_MI_IMBLOGGING_POST_NOTIFY", "Post");
+define("_MI_IMBLOGGING_POST_NOTIFY_DSC", "Notification for a single post");

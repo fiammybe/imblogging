@@ -18,7 +18,7 @@ defined("ICMS_ROOT_PATH") || die("ICMS root path not defined");
  */
 $modversion = array(
 	'name'=> _MI_IMBLOGGING_MD_NAME,
-	'version' => '1.2.0',
+	'version' => '2.0.0',
 	'description'=> _MI_IMBLOGGING_MD_DESC,
 	'author'=> "The SmartFactory",
 	'credits'=> "INBOX International inc.",
@@ -44,21 +44,21 @@ $modversion = array(
 	'developer_website_url' => "",
 	'developer_website_name' => "",
 	'developer_email' => "",
-	'warning' => _CO_ICMS_WARNING_RC
+	'warning' => defined('_MODABOUT_WARNING_RC') ? _MODABOUT_WARNING_RC : ''
 );
 
 /**
  * Contributors
  */
-$modversion['people']['developers'][] = array(
+$modversion['people']['developers'] = array(
 	"[url=https://www.impresscms.org/userinfo.php?uid=168]marcan[/url] (Marc-Andr&eacute; Lanciault)",
 	"[url=https://www.impresscms.org/userinfo.php?uid=392]stranger[/url] (Sina Asghari)",
 	"[url=https://www.impresscms.org/userinfo.php?uid=69]vaughan[/url]",
 	"[url=https://www.impresscms.org/userinfo.php?uid=54]skenow[/url]",
 	"[url=https://www.impresscms.org/userinfo.php?uid=10]sato-san[/url]");
-$modversion['people']['testers'][] = array("[url=https://www.impresscms.org/userinfo.php?uid=53]davidl2[/url]",
+$modversion['people']['testers'] = array("[url=https://www.impresscms.org/userinfo.php?uid=53]davidl2[/url]",
 	"[url=https://www.impresscms.org/userinfo.php?uid=340]nekro[/url]");
-$modversion['people']['translators'][] = array("[url=https://www.impresscms.org/userinfo.php?uid=392]stranger[/url] (Sina Asghari)",
+$modversion['people']['translators'] = array("[url=https://www.impresscms.org/userinfo.php?uid=392]stranger[/url] (Sina Asghari)",
 	"[url=https://www.impresscms.org/userinfo.php?uid=10]sato-san[/url]",
 	"[url=https://www.impresscms.org/userinfo.php?uid=179]McDonald[/url]",
 	"[url=https://www.impresscms.org/userinfo.php?uid=14]GibaPhp[/url]");
@@ -121,7 +121,7 @@ $modversion['blocks'][1] = array(
 	'show_func' => 'imblogging_post_recent_show',
 	'edit_func' => 'imblogging_post_recent_edit',
 	'options' => '5',
-	'template' => 'imblogging_post_recent.html');
+	'template' => 'imblogging_post_recent.html.tpl');
 
 $modversion['blocks'][] = array(
 	'file' => 'post_by_month.php',
@@ -130,7 +130,7 @@ $modversion['blocks'][] = array(
 	'show_func' => 'imblogging_post_by_month_show',
 	'edit_func' => 'imblogging_post_by_month_edit',
 	'options' => '',
-	'template' => 'imblogging_post_by_month.html');
+	'template' => 'imblogging_post_by_month.html.tpl');
 
 $modversion['blocks'][] = array(
 	'file' => 'post_recent.php',
@@ -139,41 +139,45 @@ $modversion['blocks'][] = array(
 	'show_func' => 'imblogging_post_recent_show',
 	'edit_func' => 'imblogging_post_recent_edit',
 	'options' => '5',
-	'template' => 'imblogging_post_spotlight.html');
+	'template' => 'imblogging_post_spotlight.html.tpl');
 
 /**
  * Templates information
  */
 $modversion['templates'][1] = array(
-	'file' => 'imblogging_header.html',
+	'file' => 'imblogging_header.html.tpl',
 	'description' => 'Module Header');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_footer.html',
+	'file' => 'imblogging_footer.html.tpl',
 	'description' => 'Module Footer');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_admin_post.html',
+	'file' => 'imblogging_admin_post.html.tpl',
 	'description' => 'Post Index');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_index.html',
+	'file' => 'imblogging_index.html.tpl',
 	'description' => 'Post Index');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_single_post.html',
+	'file' => 'imblogging_single_post.html.tpl',
 	'description' => 'Single post template');
 
 $modversion['templates'][] = array(
-	'file' => 'imblogging_post.html',
+	'file' => 'imblogging_post.html.tpl',
 	'description' => 'Post page');
+
+$modversion['templates'][] = array(
+	'file' => 'imblogging_requirements.html.tpl',
+	'description' => 'Module requirements');
 
 /**
  * Preferences information
  */
 
 // Retrieve the group user list, because the automatic group_multi config formtype does not include Anonymous group :-(
-$member_handler = &icms::handler('icms_member');
+$member_handler = icms::handler('icms_member');
 $groups_array = $member_handler->getGroupList();
 foreach ($groups_array as $k => $v) {
 	$select_groups_options[$v] = $k;
@@ -196,7 +200,7 @@ $modversion['config'][] = array(
 	'valuetype' => 'array',
 	'options' => $select_groups_options,
 	'default' => '1');
-	
+
 $modversion['config'][] = array(
 	'name' => 'posts_limit',
 	'title' => '_MI_IMBLOGGING_LIMIT',

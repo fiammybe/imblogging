@@ -122,14 +122,11 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 	}
 
 	function categories() {
-		$ret = $this->getVar('categories', 'n');
 		$ret = $this->vars['categories']['value'];
 		if (is_array($ret)) {
 			return $ret;
-		} else {
-			(int) $ret > 0 ? array(
-				(int) $ret) : false;
 		}
+		return (int) $ret > 0 ? array((int) $ret) : false;
 	}
 
 	/**
@@ -150,7 +147,7 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 	function post_status() {
 		$ret = $this->getVar('post_status', 'e');
 		$post_statusArray = $this->handler->getPost_statusArray();
-		return $post_statusArray[$ret];
+		return $post_statusArray[$ret] ?? '';
 	}
 
 	/**
@@ -161,7 +158,7 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 	function need_do_br() {
 		global $icmsConfig;
 		$imblogging_module = icms_getModuleInfo(basename(dirname(__DIR__)));
-		$groups = icms::$user->getGroups();
+		$groups = is_object(icms::$user) ? icms::$user->getGroups() : array(ICMS_GROUP_ANONYMOUS);
 
 		$editor_default = $icmsConfig['editor_default'];
 		$gperm_handler = icms::handler('icms_member_groupperm');
@@ -185,7 +182,7 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 	 */
 	function accessGranted($perm_name = null) {
 		global $imblogging_isAdmin;
-		return $this->getVar('post_status', 'e') == IMBLOGGING_POST_STATUS_PUBLISHED || $imblogging_isAdmin || $this->getVar('post_uid', 'e') == icms::$user->getVar("uid");
+		return $this->getVar('post_status', 'e') == IMBLOGGING_POST_STATUS_PUBLISHED || $imblogging_isAdmin || (is_object(icms::$user) && $this->getVar('post_uid', 'e') == icms::$user->getVar("uid"));
 	}
 
 	/**
@@ -283,7 +280,7 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 	function getPostLead() {
 		$ret = $this->getVar('post_content');
 		$slices = explode('[more]', $ret);
-		if ($slices[1]) {
+		if (isset($slices[1]) && $slices[1]) {
 			$ret = $slices[0] . ' <a href="' . $this->getItemLink(true) . '" title="' . $this->getVar('post_title') . '">' . _MD_IMBLOGGING_KEEP_READING . '</a>';
 		} else {
 			$ret = $slices[0];
@@ -509,7 +506,8 @@ class ImbloggingPostHandler extends icms_ipf_Handler {
 		if ($cid) {
 			$imtagging_category_link_handler = icms_getModuleHandler('category_link', 'imtagging');
 			$categoryids = $imtagging_category_link_handler->getItemidsForCategory($cid, $this);
-			$criteria->add(new icms_db_criteria_Item('post_id', '(' . implode(',', $categoryids) . ')', 'IN'));
+			$categoryids = array_map('intval', (array) $categoryids);
+			$criteria->add(new icms_db_criteria_Item('post_id', '(' . ($categoryids ? implode(',', $categoryids) : '0') . ')', 'IN'));
 		}
 		if ($year && $month) {
 			$criteriaYearMonth = new icms_db_criteria_Compo();
@@ -604,8 +602,8 @@ class ImbloggingPostHandler extends icms_ipf_Handler {
 		$sql = 'SELECT count(post_id) AS posts_count, MONTH(FROM_UNIXTIME(post_published_date)) AS posts_month, YEAR(FROM_UNIXTIME(post_published_date)) AS posts_year' . ' FROM ' . $this->table . ' WHERE post_published_date <= ' . time() . ' GROUP BY posts_year, posts_month' . ' HAVING posts_count > 0' . ' ORDER BY posts_year DESC, posts_month DESC';
 		$postsByMonthArray = $this->query($sql, false);
 		$ret = array();
-		$config_handler = &icms::handler('config');
-		$icmsConfig = &$config_handler->getConfigsByCat(XOOPS_CONF);
+		$config_handler = icms::handler('icms_config');
+		$icmsConfig = $config_handler->getConfigsByCat(ICMS_CONF);
 		foreach ($postsByMonthArray as $postByMonth) {
 			$postByMonthnr = $postByMonth['posts_month'];
 			$postByYearname = $postByMonth['posts_year'];
@@ -750,7 +748,7 @@ class ImbloggingPostHandler extends icms_ipf_Handler {
 	 * @return VOID
 	 */
 	function updateCounter($id) {
-		$sql = 'UPDATE ' . $this->table . ' SET counter = counter + 1 WHERE ' . $this->keyName . ' = ' . $id;
+		$sql = 'UPDATE ' . $this->table . ' SET counter = counter + 1 WHERE ' . $this->keyName . ' = ' . (int) $id;
 		$this->query($sql, null, true);
 	}
 

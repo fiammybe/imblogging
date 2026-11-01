@@ -1,4 +1,4 @@
-<{includeq file='db:imblogging_header.html'}> <{foreach
+<{includeq file='db:imblogging_header.html.tpl'}> <{foreach
 item=imblogging_post from=$imblogging_posts}>
 <div class="imblogging_post_container">
 
@@ -34,4 +34,4 @@ item=imblogging_post from=$imblogging_posts}>
 <{/foreach}> <{if $navbar}>
 <div id="imblogging_navbar"><{$smarty.const._MD_IMBLOGGING_NAV_PAGES}>
 	<{$navbar}></div>
-<{/if}> <{includeq file='db:imblogging_footer.html'}>
+<{/if}> <{includeq file='db:imblogging_footer.html.tpl'}>

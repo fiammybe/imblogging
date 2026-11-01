@@ -25,3 +25,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'از آخرین پست‌های این نو
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "پیام جدیدی را بنویسید");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');

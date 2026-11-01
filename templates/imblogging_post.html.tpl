@@ -1,9 +1,9 @@
-<{includeq file='db:imblogging_header.html'}> 
+<{includeq file='db:imblogging_header.html.tpl'}> 
 	<{if $imblogging_post}>
-		<{includeq file='db:imblogging_single_post.html'}> 
+		<{includeq file='db:imblogging_single_post.html.tpl'}> 
 	<{else}> 
 		<{foreach item=imblogging_post from=$imblogging_posts}> 
-			<{includeq file='db:imblogging_single_post.html'}> 
+			<{includeq file='db:imblogging_single_post.html.tpl'}> 
 		<{/foreach}> 
 	<{/if}> 
 	<{if $imblogging_postform}> 
@@ -12,4 +12,4 @@
 	<{if $icmspersistable_delete_confirm}> 
 		<{$icmspersistable_delete_confirm}>
 	<{/if}> 
-<{includeq file='db:imblogging_footer.html'}>
+<{includeq file='db:imblogging_footer.html.tpl'}>
