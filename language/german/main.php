@@ -24,3 +24,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'Abonieren der Beiträge des gewählten Auto
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "Beitrag hinzufügen");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');

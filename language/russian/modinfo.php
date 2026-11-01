@@ -53,3 +53,9 @@ define("_MI_IMBLOGGING_POST_ADD", "Добавить сообщение");
 
 // News import
 define("_MI_IMBLOGGING_IMPORT", "Import");
+
+// TODO: translate
+define('_MI_IMBLOGGING_DEF_VIEW_PERM', 'Default View Permissions');
+define('_MI_IMBLOGGING_DEF_VIEW_PERM_DSC', 'By default, Who can read posts. Individual posts can be adjusted');
+define("_MI_IMBLOGGING_POST_NOTIFY", "Post");
+define("_MI_IMBLOGGING_POST_NOTIFY_DSC", "Notification for a single post");

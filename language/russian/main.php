@@ -24,3 +24,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'Подписаться на последн�
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "Добавить сообщение");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');

@@ -55,3 +55,7 @@ define("_MI_IMBLOGGING_POST_ADD", "Añadir un nuevo artículo");
 
 // News import
 define("_MI_IMBLOGGING_IMPORT", "Import");
+
+// TODO: translate
+define("_MI_IMBLOGGING_POST_NOTIFY", "Post");
+define("_MI_IMBLOGGING_POST_NOTIFY_DSC", "Notification for a single post");

@@ -27,7 +27,7 @@ function imblogging_post_recent_edit($options) {
 
 	$form = '<table><tr>';
 	$form .= '<td>' . _MB_IMBLOGGING_POST_RECENT_LIMIT . '</td>';
-	$form .= '<td>' . '<input type="text" name="options[]" value="' . $options[0] . '"/></td>';
+	$form .= '<td>' . '<input type="text" name="options[]" value="' . htmlspecialchars($options[0]) . '"/></td>';
 	$form .= '</tr></table>';
 	return $form;
 }

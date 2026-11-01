@@ -67,8 +67,8 @@ $valid_op = array(
 	'view',
 	'');
 
-if (isset($_GET['op'])) $clean_op = htmlentities($_GET['op']);
-if (isset($_POST['op'])) $clean_op = htmlentities($_POST['op']);
+if (isset($_GET['op'])) $clean_op = is_string($_GET['op']) ? htmlentities($_GET['op']) : '';
+if (isset($_POST['op'])) $clean_op = is_string($_POST['op']) ? htmlentities($_POST['op']) : '';
 
 /**
  * Again, use a naming convention that indicates the source of the content of the variable
@@ -129,31 +129,13 @@ if (in_array($clean_op, $valid_op, true)) {
 			$postObj = $imblogging_post_handler->get($clean_post_id);
 
 			icms_cp_header();
-			icms_adminMenu(1, _AM_IMBLOGGING_POST_VIEW . ' > ' . $postObj->getVar('post_title'));
+			icms::$module->displayAdminMenu(1, _AM_IMBLOGGING_POST_VIEW . ' > ' . $postObj->getVar('post_title'));
 
 			icms_collapsableBar('postview', $postObj->getVar('post_title') . $postObj->getEditItemLink(), _AM_IMBLOGGING_POST_VIEW_DSC);
 
 			$postObj->displaySingleObject();
 
 			icms_close_collapsable('postview');
-
-			icms_collapsableBar('postview_posts', _AM_IMBLOGGING_POSTS, _AM_IMBLOGGING_POSTS_IN_POST_DSC);
-
-			$criteria = new icms_db_criteria_Compo();
-			$criteria->add(new icms_db_criteria_Item('post_id', $clean_post_id));
-
-			$objectTable = new icms_ipf_view_Table($imblogging_post_handler, $criteria);
-			$objectTable->addColumn(new icms_ipf_view_Column('post_date', _GLOBAL_LEFT, 150));
-			$objectTable->addColumn(new icms_ipf_view_Column('post_message'));
-			$objectTable->addColumn(new icms_ipf_view_Column('post_uid', _GLOBAL_LEFT, 150));
-			$objectTable->addColumn(new icms_ipf_view_Column('counter'));
-			$objectTable->setDefaultSort('post_published_date');
-			$objectTable->setDefaultOrder('DESC');
-			$objectTable->addIntroButton('addpost', 'post.php?op=mod&post_id=' . $clean_post_id, _AM_IMBLOGGING_POST_CREATE);
-
-			$objectTable->render();
-
-			icms_close_collapsable('postview_posts');
 
 			break;
 

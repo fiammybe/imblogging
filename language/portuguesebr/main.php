@@ -25,3 +25,6 @@ define('_MD_IMBLOGGING_RSS_POSTER', 'Inscrever-se nas últimas mensagens a parti
 
 // Submit button
 define("_MD_IMBLOGGING_POST_ADD", "Incluir novo Blog");
+
+// TODO: translate
+define('_MD_IMBLOGGING_KEEP_READING', 'keep reading ...');
