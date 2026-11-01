@@ -50,3 +50,6 @@ define("_MI_IMBLOGGING_GLOBAL_POST_PUBLISHED_NOTIFY_SBJ", "[{X_SITENAME}] {X_MOD
 
 // Submit button
 define("_MI_IMBLOGGING_POST_ADD", "Добавить сообщение");
+
+// News import
+define("_MI_IMBLOGGING_IMPORT", "Import");

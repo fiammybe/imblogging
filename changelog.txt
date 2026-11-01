@@ -7,6 +7,7 @@ Status: Beta
 Released: 
 
 Added
+* Admin page to import articles, comments, tags (as imTagging categories) and lead images from the News module
 * META title, keywords, description for the index page
 * Read permissions for posts; default permissions. Module update will apply permissions to all existing posts based on groups allowed to view the module
 

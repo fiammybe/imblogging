@@ -32,3 +32,21 @@ define("_AM_IMBLOGGING_POST_MODIFIED", "Сообщение отредактир�
 define("_AM_IMBLOGGING_POST_CREATED", "Сообщение создано.");
 define("_AM_IMBLOGGING_POST_VIEW", "Информация о сообщении");
 define("_AM_IMBLOGGING_POST_VIEW_DSC", "Информация об этом сообщении.");
+
+// News import
+define("_AM_IMBLOGGING_IMPORT", "Import from News");
+define("_AM_IMBLOGGING_IMPORT_DSC", "Copies the articles of the News module to imBlogging. Articles that already exist in imBlogging (same title, date and author) are skipped, so the import can safely be run again.");
+define("_AM_IMBLOGGING_IMPORT_NO_NEWS", "The News module data could not be found.");
+define("_AM_IMBLOGGING_IMPORT_FOUND", "Articles found in News: %d");
+define("_AM_IMBLOGGING_IMPORT_IMAGES", "Copy lead images and place them in the post");
+define("_AM_IMBLOGGING_IMPORT_WITH_COMMENTS", "Import comments");
+define("_AM_IMBLOGGING_IMPORT_TAGS", "Import Sprockets tags as imTagging categories");
+define("_AM_IMBLOGGING_IMPORT_START", "Start import");
+define("_AM_IMBLOGGING_IMPORT_CONTINUE", "Import next batch");
+define("_AM_IMBLOGGING_IMPORT_REPORT", "Import report");
+define("_AM_IMBLOGGING_IMPORT_IMPORTED", "Posts imported: %d");
+define("_AM_IMBLOGGING_IMPORT_COMMENTS", "Comments imported: %d");
+define("_AM_IMBLOGGING_IMPORT_SKIPPED", "Posts skipped (already exist): %d");
+define("_AM_IMBLOGGING_IMPORT_ERRORS", "Errors: %d");
+define("_AM_IMBLOGGING_IMPORT_SKIPPED_ITEM", "Skipped:");
+define("_AM_IMBLOGGING_IMPORT_DONE", "The import is complete.");
