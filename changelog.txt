@@ -2,6 +2,18 @@
 - removed
 ! changed
 
+== imBlogging 2.0.0 ==
+Status: RC
+Released: 
+
+Changed
+! Major version bump: requires ImpressCMS 2.0.4 and PHP 8.2 or newer
+
+Fixed
+* Compatibility with ImpressCMS 2.0.4 and PHP 8.2+ (undefined constants, variables and functions, null guards for anonymous users, empty category IN () query, unset [more] offset, admin about/view pages, category filter)
+* Restored the .html.tpl templates and registered the requirements template
+* Missing language constants in the German, Dutch, Persian, Portuguese (BR), Russian and Spanish files (English text used until translated)
+
 == imBlogging 1.2.0 ==
 Status: Beta
 Released: 
@@ -12,8 +24,6 @@ Added
 
 Fixed
 * Compatibility with ImpressCMS 2.0
-* Compatibility with PHP 8.2+ (undefined constant/variables/function, null guards for anonymous users, empty category IN () query, unset [more] offset)
-* Restored the .html.tpl templates and registered the requirements template
 
 Language changes
 modinfo.php
