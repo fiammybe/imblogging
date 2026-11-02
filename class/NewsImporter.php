@@ -27,7 +27,8 @@ class ImbloggingNewsImporter
     public function __construct(
         private bool $importTags = true,
         private bool $importComments = true,
-        private bool $importImages = true
+        private bool $importImages = true,
+        private ?int $newsModuleId = null
     ) {
         $this->db = icms::$xoopsDB;
         $this->postHandler = icms_getModuleHandler('post', IMBLOGGING_DIRNAME, 'imblogging');
@@ -56,6 +57,45 @@ class ImbloggingNewsImporter
         }
 
         return true;
+    }
+
+    public function resolveNewsModuleId(): ?int
+    {
+        if ($this->newsModuleId !== null && $this->newsModuleId > 0) {
+            return $this->newsModuleId;
+        }
+
+        $news = icms_getModuleInfo(self::NEWS_DIRNAME);
+
+        if (is_object($news)) {
+            return $this->newsModuleId = (int) $news->getVar('mid');
+        }
+
+        return $this->newsModuleId = $this->detectNewsModuleIdFromTaglinks();
+    }
+
+    public function isNewsModuleInstalled(): bool
+    {
+        return is_object(icms_getModuleInfo(self::NEWS_DIRNAME));
+    }
+
+    private function detectNewsModuleIdFromTaglinks(): ?int
+    {
+        if (!$this->isSprocketsAvailable()) {
+            return null;
+        }
+
+        $result = $this->db->query(
+            "SELECT DISTINCT mid FROM {$this->db->prefix('sprockets_taglink')} WHERE item = 'article' AND mid > 0"
+        );
+
+        if (!$result || $this->db->getRowsNum($result) !== 1) {
+            return null;
+        }
+
+        [$mid] = $this->db->fetchRow($result);
+
+        return (int) $mid;
     }
 
     public function isImtaggingAvailable(): bool
@@ -118,6 +158,10 @@ class ImbloggingNewsImporter
 
         while ($row = $this->db->fetchArray($result)) {
             $rows[] = $row;
+        }
+
+        if (($this->importTags || $this->importComments) && $this->resolveNewsModuleId() === null) {
+            $report['errors'][] = _AM_IMBLOGGING_IMPORT_NEWS_MID_UNKNOWN;
         }
 
         $report['next'] = $offset + count($rows);
@@ -248,16 +292,16 @@ class ImbloggingNewsImporter
             return [];
         }
 
-        $news = icms_getModuleInfo(self::NEWS_DIRNAME);
+        $newsModuleId = $this->resolveNewsModuleId();
 
-        if (!is_object($news)) {
+        if ($newsModuleId === null) {
             return [];
         }
 
         $sql = sprintf(
             "SELECT DISTINCT tid FROM %s WHERE mid = %d AND item = 'article' AND iid = %d AND tid > 0",
             $this->db->prefix('sprockets_taglink'),
-            (int) $news->getVar('mid'),
+            $newsModuleId,
             $articleId
         );
         $result = $this->db->query($sql);
@@ -359,16 +403,16 @@ class ImbloggingNewsImporter
 
     private function copyComments(int $articleId, int $postId): int
     {
-        $news = icms_getModuleInfo(self::NEWS_DIRNAME);
+        $newsModuleId = $this->resolveNewsModuleId();
 
-        if (!is_object($news)) {
+        if ($newsModuleId === null) {
             return 0;
         }
 
         $sql = sprintf(
             'SELECT * FROM %s WHERE com_modid = %d AND com_itemid = %d ORDER BY com_id ASC',
             $this->db->prefix('xoopscomments'),
-            (int) $news->getVar('mid'),
+            $newsModuleId,
             $articleId
         );
         $result = $this->db->query($sql);

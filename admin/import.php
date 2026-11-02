@@ -23,7 +23,9 @@ $importComments = !empty($source['import_comments']);
 $importImages = !empty($source['import_images']);
 $offset = isset($source['offset']) ? max(0, (int) $source['offset']) : 0;
 
-$importer = new ImbloggingNewsImporter($importTags, $importComments, $importImages);
+$newsModuleId = isset($source['news_mid']) && (int) $source['news_mid'] > 0 ? (int) $source['news_mid'] : null;
+
+$importer = new ImbloggingNewsImporter($importTags, $importComments, $importImages, $newsModuleId);
 
 icms_cp_header();
 icms::$module->displayAdminMenu(1, _AM_IMBLOGGING_IMPORT);
@@ -72,6 +74,7 @@ if ($cleanOp === 'import') {
     echo '<input type="hidden" name="import_tags" value="' . (int) $importTags . '" />';
     echo '<input type="hidden" name="import_comments" value="' . (int) $importComments . '" />';
     echo '<input type="hidden" name="import_images" value="' . (int) $importImages . '" />';
+    echo '<input type="hidden" name="news_mid" value="' . (int) $importer->resolveNewsModuleId() . '" />';
     echo icms::$security->getTokenHTML();
     echo '<input type="submit" value="' . _AM_IMBLOGGING_IMPORT_CONTINUE . '" />';
     echo '</form>';
@@ -84,9 +87,16 @@ echo '<h3>' . _AM_IMBLOGGING_IMPORT . '</h3>';
 echo '<p>' . _AM_IMBLOGGING_IMPORT_DSC . '</p>';
 echo '<p>' . sprintf(_AM_IMBLOGGING_IMPORT_FOUND, $importer->countArticles()) . '</p>';
 
+echo '<p>' . _AM_IMBLOGGING_IMPORT_REQUIREMENTS . '</p>';
+
+if (!$importer->isNewsModuleInstalled()) {
+    echo '<div class="errorMsg">' . _AM_IMBLOGGING_IMPORT_NEWS_NOT_INSTALLED . '</div>';
+}
+
 echo '<form method="post" action="import.php">';
 echo '<input type="hidden" name="op" value="import" />';
 echo '<input type="hidden" name="offset" value="0" />';
+echo '<p><label>' . _AM_IMBLOGGING_IMPORT_NEWS_MID . ' <input type="number" name="news_mid" min="1" value="' . (int) $importer->resolveNewsModuleId() . '" /></label><br />' . _AM_IMBLOGGING_IMPORT_NEWS_MID_DSC . '</p>';
 echo '<p><label><input type="checkbox" name="import_images" value="1" checked="checked" /> ' . _AM_IMBLOGGING_IMPORT_IMAGES . '</label></p>';
 echo '<p><label><input type="checkbox" name="import_comments" value="1" checked="checked" /> ' . _AM_IMBLOGGING_IMPORT_WITH_COMMENTS . '</label></p>';
 

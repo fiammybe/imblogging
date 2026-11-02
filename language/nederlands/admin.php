@@ -51,3 +51,9 @@ define("_AM_IMBLOGGING_IMPORT_SKIPPED", "Berichten overgeslagen (bestaan al): %d
 define("_AM_IMBLOGGING_IMPORT_ERRORS", "Fouten: %d");
 define("_AM_IMBLOGGING_IMPORT_SKIPPED_ITEM", "Overgeslagen:");
 define("_AM_IMBLOGGING_IMPORT_DONE", "De import is voltooid.");
+
+define("_AM_IMBLOGGING_IMPORT_REQUIREMENTS", "De News-module hoeft niet geïnstalleerd of werkend te zijn: enkel de databasetabellen worden gelezen (news_article, xoopscomments en eventueel sprockets_tag en sprockets_taglink, met dezelfde tabelprefix als deze site). Kopieer eerst de afbeeldingen uit uploads/news/ naar deze site.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_NOT_INSTALLED", "De News-module is niet geïnstalleerd op deze site. Tags en reacties kunnen toch geïmporteerd worden als u het module-id opgeeft dat News op de bronsite had.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID", "Module-id van News op de bronsite");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID_DSC", "Nodig om de reacties en tags van de artikelen te vinden. Wordt automatisch gedetecteerd wanneer mogelijk.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID_UNKNOWN", "Het module-id van News is onbekend, dus tags en reacties zijn niet geïmporteerd. Vul het in en voer de import opnieuw uit.");

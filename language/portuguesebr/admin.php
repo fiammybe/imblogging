@@ -51,3 +51,9 @@ define("_AM_IMBLOGGING_IMPORT_SKIPPED", "Posts skipped (already exist): %d");
 define("_AM_IMBLOGGING_IMPORT_ERRORS", "Errors: %d");
 define("_AM_IMBLOGGING_IMPORT_SKIPPED_ITEM", "Skipped:");
 define("_AM_IMBLOGGING_IMPORT_DONE", "The import is complete.");
+
+define("_AM_IMBLOGGING_IMPORT_REQUIREMENTS", "The News module does not have to be installed or working: only its database tables are read (news_article, xoopscomments and optionally sprockets_tag and sprockets_taglink, with the same table prefix as this site). Copy the images from uploads/news/ to this site first.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_NOT_INSTALLED", "The News module is not installed on this site. Tags and comments can still be imported if you give the module id News had on the source site.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID", "Module id of News on the source site");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID_DSC", "Needed to find the comments and tags of the articles. Detected automatically when possible.");
+define("_AM_IMBLOGGING_IMPORT_NEWS_MID_UNKNOWN", "The module id of News is unknown, so tags and comments were not imported. Enter it and run the import again.");
