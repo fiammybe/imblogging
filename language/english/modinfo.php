@@ -57,3 +57,6 @@ define("_MI_IMBLOGGING_POST_NOTIFY_DSC", "Notification for a single post");
 
 // Submit button - deprecate
 define("_MI_IMBLOGGING_POST_ADD", "Add a new post");
+
+// News import
+define("_MI_IMBLOGGING_IMPORT", "Import");
