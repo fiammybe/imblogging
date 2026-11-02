@@ -281,11 +281,24 @@ class ImbloggingPost extends icms_ipf_seo_Object {
 		$ret = $this->getVar('post_content');
 		$slices = explode('[more]', $ret);
 		if (isset($slices[1]) && $slices[1]) {
-			$ret = $slices[0] . ' <a href="' . $this->getItemLink(true) . '" title="' . $this->getVar('post_title') . '">' . _MD_IMBLOGGING_KEEP_READING . '</a>';
+			$ret = $slices[0] . ' <a href="' . $this->getItemLink(true) . '" title="' . $this->getVar('post_title') . '">' . $this->getKeepReadingLabel() . '</a>';
 		} else {
 			$ret = $slices[0];
 		}
 		return $ret;
+	}
+
+	/**
+	 * Label of the link to the full post; the user side language file is not always loaded (e.g. during module update)
+	 *
+	 * @return string
+	 */
+	private function getKeepReadingLabel() {
+		if (!defined('_MD_IMBLOGGING_KEEP_READING')) {
+			icms_loadLanguageFile(IMBLOGGING_DIRNAME, 'main');
+		}
+
+		return defined('_MD_IMBLOGGING_KEEP_READING') ? _MD_IMBLOGGING_KEEP_READING : 'keep reading ...';
 	}
 
 	/**
