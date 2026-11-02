@@ -63,3 +63,4 @@ define("_AM_IMBLOGGING_IMPORT_FOUND_TABLES", "Tabellen die eindigen op news_arti
 define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX", "Tabelprefix van de News-data");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC", "Enkel het deel vóór _news_article, bijvoorbeeld icms. Laat leeg om de prefix van deze site te gebruiken.");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_CHECK", "Opnieuw controleren");
+define("_AM_IMBLOGGING_IMPORT_REMAINING", "Nog te importeren berichten: %d");

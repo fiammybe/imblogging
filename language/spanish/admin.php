@@ -61,3 +61,4 @@ define("_AM_IMBLOGGING_IMPORT_FOUND_TABLES", "Tables ending in news_article in t
 define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX", "Table prefix of the News data");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC", "Only the part before _news_article, for example icms. Leave empty to use the prefix of this site.");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_CHECK", "Check again");
+define("_AM_IMBLOGGING_IMPORT_REMAINING", "Posts still to import: %d");

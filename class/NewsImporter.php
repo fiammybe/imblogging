@@ -147,6 +147,29 @@ class ImbloggingNewsImporter
         return (int) $count;
     }
 
+    public function countRemaining(): int
+    {
+        $sql = sprintf(
+            'SELECT title, date, submitter FROM %s ORDER BY article_id ASC',
+            $this->table('news_article')
+        );
+        $result = $this->db->query($sql);
+
+        if (!$result) {
+            return 0;
+        }
+
+        $remaining = 0;
+
+        while ($row = $this->db->fetchArray($result)) {
+            if (!$this->postExists($row)) {
+                $remaining++;
+            }
+        }
+
+        return $remaining;
+    }
+
     /**
      * @return array{
      *     imported: int,

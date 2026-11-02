@@ -63,6 +63,7 @@ if ($cleanOp === 'import') {
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_COMMENTS, $report['comments']) . '</li>';
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_SKIPPED, count($report['skipped'])) . '</li>';
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_ERRORS, count($report['errors'])) . '</li>';
+    echo '<li><strong>' . sprintf(_AM_IMBLOGGING_IMPORT_REMAINING, $importer->countRemaining()) . '</strong></li>';
     echo '</ul>';
 
     foreach ($report['skipped'] as $title) {
@@ -101,6 +102,7 @@ if ($cleanOp === 'import') {
 echo '<h3>' . _AM_IMBLOGGING_IMPORT . '</h3>';
 echo '<p>' . _AM_IMBLOGGING_IMPORT_DSC . '</p>';
 echo '<p>' . sprintf(_AM_IMBLOGGING_IMPORT_FOUND, $importer->countArticles()) . '</p>';
+echo '<p><strong>' . sprintf(_AM_IMBLOGGING_IMPORT_REMAINING, $importer->countRemaining()) . '</strong></p>';
 
 echo '<p>' . _AM_IMBLOGGING_IMPORT_REQUIREMENTS . '</p>';
 
