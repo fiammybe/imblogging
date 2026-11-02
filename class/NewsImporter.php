@@ -176,6 +176,7 @@ class ImbloggingNewsImporter
      *     skipped: array<int, string>,
      *     errors: array<int, string>,
      *     comments: int,
+     *     repaired: int,
      *     next: int,
      *     done: bool
      * }
@@ -187,6 +188,7 @@ class ImbloggingNewsImporter
             'skipped' => [],
             'errors' => [],
             'comments' => 0,
+            'repaired' => 0,
             'next' => $offset,
             'done' => false,
         ];
@@ -230,8 +232,14 @@ class ImbloggingNewsImporter
     {
         $title = (string) $row['title'];
 
-        if ($this->postExists($row)) {
+        $existingPost = $this->existingPost($row);
+
+        if ($existingPost !== null) {
             $report['skipped'][] = $title;
+
+            if ($this->repairViewPermission($existingPost)) {
+                $report['repaired']++;
+            }
 
             return;
         }
@@ -287,12 +295,38 @@ class ImbloggingNewsImporter
 
     private function postExists(array $row): bool
     {
+        return $this->existingPost($row) !== null;
+    }
+
+    private function existingPost(array $row): ?object
+    {
         $criteria = new icms_db_criteria_Compo();
         $criteria->add(new icms_db_criteria_Item('post_title', (string) $row['title']));
         $criteria->add(new icms_db_criteria_Item('post_published_date', (int) $row['date']));
         $criteria->add(new icms_db_criteria_Item('post_uid', (int) $row['submitter']));
+        $criteria->setLimit(1);
 
-        return $this->postHandler->getCount($criteria) > 0;
+        $posts = $this->postHandler->getObjects($criteria);
+
+        return $posts ? reset($posts) : null;
+    }
+
+    private function repairViewPermission(object $post): bool
+    {
+        if ((int) $post->getVar('post_status', 'e') !== IMBLOGGING_POST_STATUS_PUBLISHED) {
+            return false;
+        }
+
+        $imblogging = icms_getModuleInfo(IMBLOGGING_DIRNAME);
+        $groupPermHandler = icms::handler('icms_member_groupperm');
+
+        if ($groupPermHandler->getGroupIds('post_view', (int) $post->id(), (int) $imblogging->getVar('mid'))) {
+            return false;
+        }
+
+        $this->grantViewToAllGroups((int) $post->id());
+
+        return true;
     }
 
     private function mapStatus(array $row): int

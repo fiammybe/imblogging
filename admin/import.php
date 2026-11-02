@@ -62,6 +62,7 @@ if ($cleanOp === 'import') {
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_IMPORTED, $report['imported']) . '</li>';
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_COMMENTS, $report['comments']) . '</li>';
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_SKIPPED, count($report['skipped'])) . '</li>';
+    echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_REPAIRED, $report['repaired']) . '</li>';
     echo '<li>' . sprintf(_AM_IMBLOGGING_IMPORT_ERRORS, count($report['errors'])) . '</li>';
     echo '<li><strong>' . sprintf(_AM_IMBLOGGING_IMPORT_REMAINING, $importer->countRemaining()) . '</strong></li>';
     echo '</ul>';

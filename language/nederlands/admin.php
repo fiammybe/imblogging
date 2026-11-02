@@ -64,3 +64,4 @@ define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX", "Tabelprefix van de News-data");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC", "Enkel het deel vóór _news_article, bijvoorbeeld icms. Laat leeg om de prefix van deze site te gebruiken.");
 define("_AM_IMBLOGGING_IMPORT_SOURCE_CHECK", "Opnieuw controleren");
 define("_AM_IMBLOGGING_IMPORT_REMAINING", "Nog te importeren berichten: %d");
+define("_AM_IMBLOGGING_IMPORT_REPAIRED", "Bestaande berichten waarvan het leesrecht voor alle groepen is hersteld: %d");
