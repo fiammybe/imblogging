@@ -54,7 +54,7 @@ class ImbloggingNewsImporter
      */
     public function findArticleTables(): array
     {
-        $result = $this->db->query("SHOW TABLES LIKE '%news\\_article'");
+        $result = $this->db->queryF("SHOW TABLES LIKE '%news\\_article'");
 
         if (!$result) {
             return [];
@@ -78,7 +78,7 @@ class ImbloggingNewsImporter
 
     private function tableExists(string $name): bool
     {
-        $result = $this->db->query("SHOW TABLES LIKE '{$this->table($name)}'");
+        $result = $this->db->queryF("SHOW TABLES LIKE '{$this->table($name)}'");
 
         return $result && $this->db->getRowsNum($result) > 0;
     }
