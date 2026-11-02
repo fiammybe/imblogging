@@ -18,6 +18,7 @@ if (!defined("IMBLOGGING_ADMIN_URL")) define("IMBLOGGING_ADMIN_URL", IMBLOGGING_
 
 // Include the common language file of the module
 icms_loadLanguageFile(IMBLOGGING_DIRNAME, 'common');
+icms_loadLanguageFile(IMBLOGGING_DIRNAME, 'main');
 
 // Creating the module object to make it available throughout the module
 $imbloggingModule = icms_getModuleInfo(IMBLOGGING_DIRNAME);
