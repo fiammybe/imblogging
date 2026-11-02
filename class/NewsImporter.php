@@ -265,8 +265,23 @@ class ImbloggingNewsImporter
 
         $report['imported']++;
 
+        if ($this->mapStatus($row) === IMBLOGGING_POST_STATUS_PUBLISHED) {
+            $this->grantViewToAllGroups((int) $post->id());
+        }
+
         if ($this->importComments) {
             $report['comments'] += $this->copyComments((int) $row['article_id'], (int) $post->id());
+        }
+    }
+
+    private function grantViewToAllGroups(int $postId): void
+    {
+        $imblogging = icms_getModuleInfo(IMBLOGGING_DIRNAME);
+        $groupPermHandler = icms::handler('icms_member_groupperm');
+        $groupIds = array_keys(icms::handler('icms_member')->getGroupList());
+
+        foreach ($groupIds as $groupId) {
+            $groupPermHandler->addRight('post_view', $postId, (int) $groupId, (int) $imblogging->getVar('mid'));
         }
     }
 
