@@ -25,13 +25,27 @@ $offset = isset($source['offset']) ? max(0, (int) $source['offset']) : 0;
 
 $newsModuleId = isset($source['news_mid']) && (int) $source['news_mid'] > 0 ? (int) $source['news_mid'] : null;
 
-$importer = new ImbloggingNewsImporter($importTags, $importComments, $importImages, $newsModuleId);
+$sourcePrefix = isset($source['source_prefix']) && trim((string) $source['source_prefix']) !== '' ? trim((string) $source['source_prefix']) : null;
+
+$importer = new ImbloggingNewsImporter($importTags, $importComments, $importImages, $newsModuleId, $sourcePrefix);
 
 icms_cp_header();
 icms::$module->displayAdminMenu(1, _AM_IMBLOGGING_IMPORT);
 
 if (!$importer->isNewsAvailable()) {
-    echo '<div class="errorMsg">' . _AM_IMBLOGGING_IMPORT_NO_NEWS . '</div>';
+    echo '<div class="errorMsg">' . _AM_IMBLOGGING_IMPORT_NO_NEWS . ' ' . sprintf(_AM_IMBLOGGING_IMPORT_NO_NEWS_TABLE, htmlspecialchars($importer->articleTableName())) . '</div>';
+
+    $foundTables = $importer->findArticleTables();
+
+    if ($foundTables) {
+        echo '<p>' . _AM_IMBLOGGING_IMPORT_FOUND_TABLES . ' ' . htmlspecialchars(implode(', ', $foundTables)) . '</p>';
+    }
+
+    echo '<form method="post" action="import.php">';
+    echo '<p><label>' . _AM_IMBLOGGING_IMPORT_SOURCE_PREFIX . ' <input type="text" name="source_prefix" value="' . htmlspecialchars((string) $sourcePrefix) . '" /></label><br />' . _AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC . '</p>';
+    echo '<input type="submit" value="' . _AM_IMBLOGGING_IMPORT_SOURCE_CHECK . '" />';
+    echo '</form>';
+
     icms_cp_footer();
     exit();
 }
@@ -75,6 +89,7 @@ if ($cleanOp === 'import') {
     echo '<input type="hidden" name="import_comments" value="' . (int) $importComments . '" />';
     echo '<input type="hidden" name="import_images" value="' . (int) $importImages . '" />';
     echo '<input type="hidden" name="news_mid" value="' . (int) $importer->resolveNewsModuleId() . '" />';
+    echo '<input type="hidden" name="source_prefix" value="' . htmlspecialchars((string) $sourcePrefix) . '" />';
     echo icms::$security->getTokenHTML();
     echo '<input type="submit" value="' . _AM_IMBLOGGING_IMPORT_CONTINUE . '" />';
     echo '</form>';
@@ -96,6 +111,7 @@ if (!$importer->isNewsModuleInstalled()) {
 echo '<form method="post" action="import.php">';
 echo '<input type="hidden" name="op" value="import" />';
 echo '<input type="hidden" name="offset" value="0" />';
+echo '<input type="hidden" name="source_prefix" value="' . htmlspecialchars((string) $sourcePrefix) . '" />';
 echo '<p><label>' . _AM_IMBLOGGING_IMPORT_NEWS_MID . ' <input type="number" name="news_mid" min="1" value="' . (int) $importer->resolveNewsModuleId() . '" /></label><br />' . _AM_IMBLOGGING_IMPORT_NEWS_MID_DSC . '</p>';
 echo '<p><label><input type="checkbox" name="import_images" value="1" checked="checked" /> ' . _AM_IMBLOGGING_IMPORT_IMAGES . '</label></p>';
 echo '<p><label><input type="checkbox" name="import_comments" value="1" checked="checked" /> ' . _AM_IMBLOGGING_IMPORT_WITH_COMMENTS . '</label></p>';

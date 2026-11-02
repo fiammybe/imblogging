@@ -28,35 +28,64 @@ class ImbloggingNewsImporter
         private bool $importTags = true,
         private bool $importComments = true,
         private bool $importImages = true,
-        private ?int $newsModuleId = null
+        private ?int $newsModuleId = null,
+        private ?string $sourcePrefix = null
     ) {
+        if ($this->sourcePrefix !== null && !preg_match('/^[A-Za-z0-9_]+$/', $this->sourcePrefix)) {
+            $this->sourcePrefix = null;
+        }
+
         $this->db = icms::$xoopsDB;
         $this->postHandler = icms_getModuleHandler('post', IMBLOGGING_DIRNAME, 'imblogging');
     }
 
     public function isNewsAvailable(): bool
     {
-        $result = $this->db->query("SHOW TABLES LIKE '{$this->db->prefix('news_article')}'");
+        return $this->tableExists('news_article');
+    }
+
+    public function articleTableName(): string
+    {
+        return $this->table('news_article');
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public function findArticleTables(): array
+    {
+        $result = $this->db->query("SHOW TABLES LIKE '%news\\_article'");
+
+        if (!$result) {
+            return [];
+        }
+
+        $tables = [];
+
+        while ($row = $this->db->fetchRow($result)) {
+            $tables[] = (string) $row[0];
+        }
+
+        return $tables;
+    }
+
+    private function table(string $name): string
+    {
+        return $this->sourcePrefix === null ?
+            $this->db->prefix($name) :
+            "{$this->sourcePrefix}_{$name}";
+    }
+
+    private function tableExists(string $name): bool
+    {
+        $result = $this->db->query("SHOW TABLES LIKE '{$this->table($name)}'");
 
         return $result && $this->db->getRowsNum($result) > 0;
     }
 
     public function isSprocketsAvailable(): bool
     {
-        $tables = [
-            $this->db->prefix('sprockets_tag'),
-            $this->db->prefix('sprockets_taglink'),
-        ];
-
-        foreach ($tables as $table) {
-            $result = $this->db->query("SHOW TABLES LIKE '{$table}'");
-
-            if (!$result || $this->db->getRowsNum($result) === 0) {
-                return false;
-            }
-        }
-
-        return true;
+        return $this->tableExists('sprockets_tag') && $this->tableExists('sprockets_taglink');
     }
 
     public function resolveNewsModuleId(): ?int
@@ -86,7 +115,7 @@ class ImbloggingNewsImporter
         }
 
         $result = $this->db->query(
-            "SELECT DISTINCT mid FROM {$this->db->prefix('sprockets_taglink')} WHERE item = 'article' AND mid > 0"
+            "SELECT DISTINCT mid FROM {$this->table('sprockets_taglink')} WHERE item = 'article' AND mid > 0"
         );
 
         if (!$result || $this->db->getRowsNum($result) !== 1) {
@@ -107,7 +136,7 @@ class ImbloggingNewsImporter
 
     public function countArticles(): int
     {
-        $result = $this->db->query("SELECT COUNT(*) FROM {$this->db->prefix('news_article')}");
+        $result = $this->db->query("SELECT COUNT(*) FROM {$this->table('news_article')}");
 
         if (!$result) {
             return 0;
@@ -141,7 +170,7 @@ class ImbloggingNewsImporter
 
         $sql = sprintf(
             'SELECT * FROM %s ORDER BY article_id ASC LIMIT %d, %d',
-            $this->db->prefix('news_article'),
+            $this->table('news_article'),
             $offset,
             self::BATCH_SIZE
         );
@@ -300,7 +329,7 @@ class ImbloggingNewsImporter
 
         $sql = sprintf(
             "SELECT DISTINCT tid FROM %s WHERE mid = %d AND item = 'article' AND iid = %d AND tid > 0",
-            $this->db->prefix('sprockets_taglink'),
+            $this->table('sprockets_taglink'),
             $newsModuleId,
             $articleId
         );
@@ -380,7 +409,7 @@ class ImbloggingNewsImporter
 
         $sql = sprintf(
             'SELECT title, parent_id FROM %s WHERE tag_id = %d',
-            $this->db->prefix('sprockets_tag'),
+            $this->table('sprockets_tag'),
             $tagId
         );
         $result = $this->db->query($sql);
@@ -411,7 +440,7 @@ class ImbloggingNewsImporter
 
         $sql = sprintf(
             'SELECT * FROM %s WHERE com_modid = %d AND com_itemid = %d ORDER BY com_id ASC',
-            $this->db->prefix('xoopscomments'),
+            $this->table('xoopscomments'),
             $newsModuleId,
             $articleId
         );

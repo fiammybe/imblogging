@@ -57,3 +57,9 @@ define("_AM_IMBLOGGING_IMPORT_NEWS_NOT_INSTALLED", "The News module is not insta
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID", "Module id of News on the source site");
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID_DSC", "Needed to find the comments and tags of the articles. Detected automatically when possible.");
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID_UNKNOWN", "The module id of News is unknown, so tags and comments were not imported. Enter it and run the import again.");
+
+define("_AM_IMBLOGGING_IMPORT_NO_NEWS_TABLE", "Table not found: %s.");
+define("_AM_IMBLOGGING_IMPORT_FOUND_TABLES", "Tables ending in news_article in this database:");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX", "Table prefix of the News data");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC", "Only the part before _news_article, for example icms. Leave empty to use the prefix of this site.");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_CHECK", "Check again");

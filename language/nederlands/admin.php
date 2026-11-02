@@ -57,3 +57,9 @@ define("_AM_IMBLOGGING_IMPORT_NEWS_NOT_INSTALLED", "De News-module is niet geïn
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID", "Module-id van News op de bronsite");
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID_DSC", "Nodig om de reacties en tags van de artikelen te vinden. Wordt automatisch gedetecteerd wanneer mogelijk.");
 define("_AM_IMBLOGGING_IMPORT_NEWS_MID_UNKNOWN", "Het module-id van News is onbekend, dus tags en reacties zijn niet geïmporteerd. Vul het in en voer de import opnieuw uit.");
+
+define("_AM_IMBLOGGING_IMPORT_NO_NEWS_TABLE", "Tabel niet gevonden: %s.");
+define("_AM_IMBLOGGING_IMPORT_FOUND_TABLES", "Tabellen die eindigen op news_article in deze database:");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX", "Tabelprefix van de News-data");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_PREFIX_DSC", "Enkel het deel vóór _news_article, bijvoorbeeld icms. Laat leeg om de prefix van deze site te gebruiken.");
+define("_AM_IMBLOGGING_IMPORT_SOURCE_CHECK", "Opnieuw controleren");
