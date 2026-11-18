@@ -6,6 +6,9 @@
 Status: RC
 Released: 
 
+Added
+* Admin page to import articles, comments, tags (as imTagging categories) and lead images from the News module
+
 Changed
 ! Major version bump: requires ImpressCMS 2.0.4 and PHP 8.2 or newer
 

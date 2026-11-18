@@ -12,6 +12,10 @@ $adminmenu[] = array(
 	'title' => _MI_IMBLOGGING_POSTS,
 	'link' => "admin/post.php");
 
+$adminmenu[] = array(
+	'title' => _MI_IMBLOGGING_IMPORT,
+	'link' => "admin/import.php");
+
 if (isset(icms::$module)) {
 	$moddir = basename(dirname(__DIR__));
 
