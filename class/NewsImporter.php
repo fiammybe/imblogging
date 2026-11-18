@@ -24,13 +24,29 @@ class ImbloggingNewsImporter
     /** @var array<int, array{title: string, parent_id: int}> */
     private array $sprocketsTags = [];
 
+    private bool $importTags;
+
+    private bool $importComments;
+
+    private bool $importImages;
+
+    private ?int $newsModuleId;
+
+    private ?string $sourcePrefix;
+
     public function __construct(
-        private bool $importTags = true,
-        private bool $importComments = true,
-        private bool $importImages = true,
-        private ?int $newsModuleId = null,
-        private ?string $sourcePrefix = null
+        bool $importTags = true,
+        bool $importComments = true,
+        bool $importImages = true,
+        ?int $newsModuleId = null,
+        ?string $sourcePrefix = null
     ) {
+        $this->importTags = $importTags;
+        $this->importComments = $importComments;
+        $this->importImages = $importImages;
+        $this->newsModuleId = $newsModuleId;
+        $this->sourcePrefix = $sourcePrefix;
+
         if ($this->sourcePrefix !== null && !preg_match('/^[A-Za-z0-9_]+$/', $this->sourcePrefix)) {
             $this->sourcePrefix = null;
         }
